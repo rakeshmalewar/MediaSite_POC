@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model List<MediaSiteTest_RestSharp.Controllers.VideoInfo>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <input type="text" id="txtSearch" name="txtSearch" />
+    <button type="submit">Search</button>
+}
+@if(TempData["Recordcount"] != null)
+{
+    var tempval = TempData["Recordcount"];
+    Response.Write("Record Count:" + tempval);
+}
+
+
+<div>
+    <table style="width:50%;">
+        <tr>
+            <th align="center">Thumbnail</th>
+
+        </tr>
+        <tr >
+    @foreach (var item in Model)
+    {
+        
+            <td align="center" style="border: 1px solid black;"><a target="_blank" href=@item.videoContentURL> <img src=@item.thumbNailUrl height="150" width="150"></a><br> @item.Title <br> @item.Id</td>
+
+            }
+</tr>
+    </table>
+</div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        /*
+        $(document).ready(function () {
+            alert("Inside");
+            $.getJSON("PopulatePresentations",
+            function (json) {
+                var tr;
+                alert(json);
+
+                var values = JSON.parse(json);
+                alert(values.length);
+                alert(values[0].ThumbnailUrl);
+            //Append each row to html table
+                for (var i = 0; i < json.length; i++) {
+
+                    tr = $('<tr/>');
+                    tr.append("<td>" + json[i].Id + "</td>");
+                    tr.append("<td>" + json[i].ThumbnailUrl + "</td>");
+                    tr.append("<td>" + json[i].Description + "</td>");
+                    tr.append("<td>" + json[i].RecordDate + "</td>");
+                    $('table').append(tr);
+                }
+            });
+        });
+        */
+    </script>
+
+    
